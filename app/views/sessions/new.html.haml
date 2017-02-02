@@ -1,0 +1,17 @@
+%h1.text-center Log in
+.row
+  .col-xs-12
+    = form_for :session, html: {class: "form-horizontal", role: "form"}, url: login_path do |f|
+      .form-group
+        .col-sm-2.control-label
+          = f.label :email
+        .col-sm-8
+          = f.email_field :email, class: "form-control", placeholder:"Enter email", autofocus: true
+      .form-group
+        .col-sm-2.control-label
+          = f.label :password
+        .col-sm-8
+          = f.password_field :password, class: "form-control", placeholder:"Email", autofocus: true
+      .form-group
+        .col-sm-offset-2.col-sm-8
+          = f.submit 'Log in', class: "btn btn-primary btn-lg"

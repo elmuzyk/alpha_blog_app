@@ -1,0 +1,27 @@
+-obj.each do |article|
+  .row.text-center
+    .col-xs-8.col-xs-offset-2
+      .well.well-lg
+        .article-title
+          = link_to article.title, article_path(article)
+        .article-body
+          = truncate(article.description, length: 100)
+        .article-meta-details
+          Created by:
+          = article.user.username if article.user
+          %br
+          Created at:
+          = time_ago_in_words(article.created_at)
+          ago,
+    
+          Updated at:
+          = time_ago_in_words(article.updated_at)
+          ago
+        - if article.categories.any?
+          %br
+          %p Categories:
+          = render article.categories
+        - if logged_in? && (current_user == article.user || current_user.admin?)
+          .article-actions
+          = link_to 'Edit', edit_article_path(article), class: "btn btn-xs btn-primary"
+          = link_to 'Delete', article_path(article), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-xs btn-danger"

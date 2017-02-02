@@ -1,0 +1,21 @@
+= render 'shared/errors', obj: @record
+.row
+  .col-xs-12
+    = form_for @record, html: {class: "form-horizontal", role: "form"} do |f|
+      .form-group
+        .col-sm-2.control-label
+          = f.label :title
+        .col-sm-8
+          = f.text_field :title, class: "form-control", placeholder:"Title of article", autofocus: true
+      .form-group
+        .col-sm-2.control-label
+          = f.label :description
+        .col-sm-8
+          = f.text_field :description, class: "form-control", placeholder:"Description of article", autofocus: true
+      .form-group
+        .col-sm-offset-2.col-sm-8
+          = f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb|
+            - cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text}
+      .form-group
+        .col-sm-offset-2.col-sm-8
+          = f.submit class: "btn btn-primary btn-lg"

@@ -1,0 +1,6 @@
+%h1 Listing all articles
+.center
+  = paginate @records
+= render 'article', obj: @records
+.center
+  = paginate @records

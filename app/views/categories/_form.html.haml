@@ -1,0 +1,11 @@
+.row
+  .col-xs-12
+    = form_for @record, html: {class: "form-horizontal", role: "form"} do |f|
+      .form-group
+        .col-sm-2.control-label
+          = f.label :name
+        .col-sm-8
+          = f.text_field :name, class: "form-control", placeholder:"Enter Name of Category", autofocus: true
+      .form-group
+        .col-sm-offset-2.col-sm-8
+          = f.submit (@record.new_record? ? "Create new category": "Update Category"), class: "btn btn-primary btn-lg"

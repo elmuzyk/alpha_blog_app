@@ -1,0 +1,11 @@
+-if obj.errors.any?
+  .row
+    .col-xs-8.col-xs-offset-2
+      .panel.panel-danger
+        .panel-heading
+          .panel-title
+          = pluralize(obj.errors.count, "error")
+          %span prohibited this article from being saved:
+          .panel-body
+          - obj.errors.full_messages.each do |msg|
+            %li= msg

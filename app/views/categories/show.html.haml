@@ -1,0 +1,9 @@
+%h1.text-center Category: #{@record.name}
+.center
+  = paginate @record_articles
+  .row
+  - if logged_in? and current_user.admin?
+    %p.badge= link_to "Edit Category Name", edit_category_path(@record)
+= render 'articles/article', obj: @record_articles
+.center
+  = paginate @record_articles

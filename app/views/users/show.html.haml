@@ -1,0 +1,10 @@
+%h1.text-center Welcome to #{@record.username}'s page
+.row.text-center
+  .col-md-4.col-md-offset-4
+    = gravatar_for @record, size: 150
+%h4.text-center #{@record.username}' articles
+.center
+  = paginate @record_articles
+= render 'articles/article', obj: @record_articles
+.center
+  = paginate @record_articles

@@ -1,0 +1,62 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    / Brand and toggle get grouped for better mobile display
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to "Alpha Blog", root_path, class: "navbar-brand", id: "logo"
+    / Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li= link_to "Articles", articles_path
+        %li= link_to "Users", users_path
+        - if logged_in?
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Actions
+              %span.caret
+            %ul.dropdown-menu
+              %li= link_to "New Article", new_article_path
+              %li= link_to "All Articles", articles_path
+              %li.divider{:role => "separator"}
+              %li
+                %a{:href => "#"} Separated link
+              %li.divider{:role => "separator"}
+
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Categories
+              %span.caret
+            %ul.dropdown-menu
+              - if logged_in? and current_user.admin?
+                %li= link_to "Create Category", new_category_path
+              - Category.all.each do |category|
+                %li= link_to "#{category.name}", category_path(category)
+              %li.divider{:role => "separator"}
+              %li= link_to "All categories", categories_path
+      %form.navbar-form.navbar-left
+        .form-group
+          %input.form-control{:placeholder => "Search", :type => "text"}/
+        %button.btn.btn-default{:type => "submit"} Submit
+      %ul.nav.navbar-nav.navbar-right
+        - if logged_in?
+          %li= link_to "Logout", logout_path, method: :delete
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Profile
+              = "Admin" if current_user.admin?
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a= link_to "Edit your profile", edit_user_path(current_user)
+              %li
+                %a= link_to "View your profile", user_path(current_user)
+              %li.divider{:role => "separator"}
+              %li
+                %a{:href => "#"} Separated link
+        - else
+          %li= link_to "Log in", login_path
+          %li= link_to "Sign up", signup_path

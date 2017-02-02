@@ -1,0 +1,22 @@
+= render 'shared/errors', obj: @record
+.row
+  .col-xs-12
+    = form_for @record, html: {class: "form-horizontal", role: "form"} do |f|
+      .form-group
+        .col-sm-2.control-label
+          = f.label :username
+        .col-sm-8
+          = f.text_field :username, class: "form-control", placeholder:"Enter Name", autofocus: true
+      .form-group
+        .col-sm-2.control-label
+          = f.label :description
+        .col-sm-8
+          = f.text_field :email, class: "form-control", placeholder:"Enter Email", autofocus: true
+      .form-group
+        .col-sm-2.control-label
+          = f.label :password
+        .col-sm-8
+          = f.text_field :password, class: "form-control", placeholder:"Enter Password", autofocus: true
+      .form-group
+        .col-sm-offset-2.col-sm-8
+          = f.submit (@record.new_record? ? "Sign up": "Update Account"), class: "btn btn-primary btn-lg"
